@@ -22,7 +22,7 @@ O programa ja inicia com 5 produtos cadastrados para facilitar os testes de list
 | 102 | Caderno Universitario | 12 | R$ 18.90 |
 | 103 | Borracha Branca | 30 | R$ 1.75 |
 | 104 | Lapis HB | 40 | R$ 1.20 |
-| 105 | Estojo Escolar | 8 | R$ 24.99 |
+| 105 | Estojo Escolar | 5 | R$ 12.50 |
 
 ## Como compilar
 
