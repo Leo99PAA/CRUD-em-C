@@ -25,6 +25,7 @@ int main() {
     int posicao = -1;
     int idBusca = 0;
     int idDuplicado = 0;
+    int nomeValido = 0;
     char confirmar = 'n';
     int c = 0;
 
@@ -77,15 +78,25 @@ int main() {
                 } while (entradaValida != 1 || produtos[quantidadeAtual].id <= 0 || idDuplicado == 1);
 
                 do {
+                    nomeValido = 0;
                     printf("Digite o nome do produto: ");
-                    entradaValida = scanf(" %49[^\n]", produtos[quantidadeAtual].nome);
-                    while ((c = getchar()) != '\n' && c != EOF) {
+                    if (fgets(produtos[quantidadeAtual].nome, 50, stdin) != NULL) {
+                        entradaValida = 1;
+                        produtos[quantidadeAtual].nome[strcspn(produtos[quantidadeAtual].nome, "\n")] = '\0';
+
+                        for (i = 0; produtos[quantidadeAtual].nome[i] != '\0'; i++) {
+                            if (produtos[quantidadeAtual].nome[i] != ' ' && produtos[quantidadeAtual].nome[i] != '\t') {
+                                nomeValido = 1;
+                            }
+                        }
+                    } else {
+                        entradaValida = 0;
                     }
 
-                    if (entradaValida != 1 || strlen(produtos[quantidadeAtual].nome) == 0) {
+                    if (entradaValida != 1 || strlen(produtos[quantidadeAtual].nome) == 0 || nomeValido == 0) {
                         printf("Nome invalido. O nome nao pode ficar vazio.\n");
                     }
-                } while (entradaValida != 1 || strlen(produtos[quantidadeAtual].nome) == 0);
+                } while (entradaValida != 1 || strlen(produtos[quantidadeAtual].nome) == 0 || nomeValido == 0);
 
                 do {
                     printf("Digite a quantidade em estoque (0 ou maior): ");
@@ -185,15 +196,25 @@ int main() {
                     printf("\nAtualizando produto: %s\n", produtos[posicao].nome);
 
                     do {
+                        nomeValido = 0;
                         printf("Digite o novo nome do produto: ");
-                        entradaValida = scanf(" %49[^\n]", produtos[posicao].nome);
-                        while ((c = getchar()) != '\n' && c != EOF) {
+                        if (fgets(produtos[posicao].nome, 50, stdin) != NULL) {
+                            entradaValida = 1;
+                            produtos[posicao].nome[strcspn(produtos[posicao].nome, "\n")] = '\0';
+
+                            for (i = 0; produtos[posicao].nome[i] != '\0'; i++) {
+                                if (produtos[posicao].nome[i] != ' ' && produtos[posicao].nome[i] != '\t') {
+                                    nomeValido = 1;
+                                }
+                            }
+                        } else {
+                            entradaValida = 0;
                         }
 
-                        if (entradaValida != 1 || strlen(produtos[posicao].nome) == 0) {
+                        if (entradaValida != 1 || strlen(produtos[posicao].nome) == 0 || nomeValido == 0) {
                             printf("Nome invalido. O nome nao pode ficar vazio.\n");
                         }
-                    } while (entradaValida != 1 || strlen(produtos[posicao].nome) == 0);
+                    } while (entradaValida != 1 || strlen(produtos[posicao].nome) == 0 || nomeValido == 0);
 
                     do {
                         printf("Digite a nova quantidade em estoque (0 ou maior): ");
@@ -245,11 +266,17 @@ int main() {
                 if (posicao == -1) {
                     printf("\nProduto nao encontrado. Remocao cancelada.\n");
                 } else {
-                    printf("\nProduto encontrado: %s\n", produtos[posicao].nome);
-                    printf("Confirma a remocao? (s/n): ");
-                    entradaValida = scanf(" %c", &confirmar);
-                    while ((c = getchar()) != '\n' && c != EOF) {
-                    }
+                    do {
+                        printf("\nProduto encontrado: %s\n", produtos[posicao].nome);
+                        printf("Confirma a remocao? (s/n): ");
+                        entradaValida = scanf(" %c", &confirmar);
+                        while ((c = getchar()) != '\n' && c != EOF) {
+                        }
+
+                        if (entradaValida != 1 || (confirmar != 's' && confirmar != 'S' && confirmar != 'n' && confirmar != 'N')) {
+                            printf("Opcao invalida. Digite apenas s para sim ou n para nao.\n");
+                        }
+                    } while (entradaValida != 1 || (confirmar != 's' && confirmar != 'S' && confirmar != 'n' && confirmar != 'N'));
 
                     if (entradaValida == 1 && (confirmar == 's' || confirmar == 'S')) {
                         for (i = posicao; i < quantidadeAtual - 1; i++) {

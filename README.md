@@ -12,6 +12,7 @@ O programa ja inicia com 5 produtos cadastrados para facilitar os testes de list
 - Atualizar produto
 - Remover produto
 - Validar entradas invalidas, IDs duplicados e operacoes sem registros
+- Repetir a mesma pergunta quando o usuario informa um dado invalido
 
 ## Produtos iniciais para teste
 
