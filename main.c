@@ -11,8 +11,14 @@ typedef struct {
 } Produto;
 
 int main() {
-    Produto produtos[MAX_REGISTROS];
-    int quantidadeAtual = 0;
+    Produto produtos[MAX_REGISTROS] = {
+        {101, "Caneta Azul", 25, 2.50},
+        {102, "Caderno Universitario", 12, 18.90},
+        {103, "Borracha Branca", 30, 1.75},
+        {104, "Lapis HB", 40, 1.20},
+        {105, "Estojo Escolar", 8, 24.99}
+    };
+    int quantidadeAtual = 5;
     int opcao = 0;
     int entradaValida = 0;
     int i = 0;
